@@ -1,4 +1,4 @@
-## Mendelian Randomization 
+## Randomizacion Mendeliana
 
 	- **Author(s):** Sara Bandres-Ciga
 	- **Date Last Updated:** Sept 2019
@@ -20,7 +20,7 @@ COLESTEROL$beta <- as.numeric(COLESTEROL$beta)
 COLESTEROL$SNP <- as.character(COLESTEROL$SNP)
 ```
 
-## Seleccionamos SNPs de LDL-colesterol independientes
+## Seleccionamos SNPs de LDL-colesterol independientes (Exposure)
 ```
 Exp_data <- format_data(COLESTEROL, type="exposure")
 Exp_data <- clump_data(Exp_data)
@@ -38,7 +38,7 @@ ALS$SNP <- as.character(ALS$SNP)
 ```
 Out_data <- format_data(ALS, type="outcome")
 ```
-### Harmonizamos las Summary statistics del GWAS del colesterol y los summary statistics referentes al GWAS de Esclerosis lateral amiotrofica
+### Harmonizamos las summary statistics del GWAS del colesterol y las summary statistics referentes al GWAS de Esclerosis lateral amiotrofica
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
