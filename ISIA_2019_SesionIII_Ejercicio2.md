@@ -18,20 +18,27 @@ COLESTEROL$effect_allele <- as.character(COLESTEROL$effect_allele)
 COLESTEROL$other_allele <- as.character(COLESTEROL$other_allele)
 COLESTEROL$beta <- as.numeric(COLESTEROL$beta)
 COLESTEROL$SNP <- as.character(COLESTEROL$SNP)
+```
+
+## Seleccionamos SNPs de LDL-colesterol independientes
+```
 Exp_data <- format_data(COLESTEROL, type="exposure")
 Exp_data <- clump_data(Exp_data)
 ```
 ## Leemos las variables instrumentales del GWAS de Enfermedad de Parkinson
-En este casos son los SNPs de Colesterol que hemos extraido de las Summary Stats de Esclerosis lateral amiotrofica
-
+En este casos son los SNPs de LDL-colesterol que hemos extraido de las Summary Stats de Esclerosis lateral amiotrofica
 ```	
 ALS <- read.table("ALS_Colesterol.txt", header =TRUE)
 ALS$effect_allele <- as.character(ALS$effect_allele)
 ALS$other_allele <- as.character(ALS$other_allele)
 ALS$SNP <- as.character(ALS$SNP)
+```
+
+## Formateamos las variables instrumentales de esclerosis lateral amiotrofica (Outcome)
+```
 Out_data <- format_data(ALS, type="outcome")
 ```
-### Harmonizamos las Summary statistics del GWAS de acido urico y los summary statistics referentes al GWAS de Parkinson
+### Harmonizamos las Summary statistics del GWAS del colesterol y los summary statistics referentes al GWAS de Esclerosis lateral amiotrofica
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
