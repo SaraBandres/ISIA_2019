@@ -1,4 +1,4 @@
-## Mendelian Randomization 
+## Randomizacion Mendeliana
 
 	- **Author(s):** Sara Bandres-Ciga
 	- **Date Last Updated:** Sept 2019
@@ -43,7 +43,7 @@ PD$SNP <- as.character(PD$SNP)
 ```	
 Out_data <- format_data(PD, type="outcome")
 ```
-## Harmonizamos las Summary statistics del GWAS de acido urico y los summary statistics referentes al GWAS de Parkinson
+## Harmonizamos las summary statistics del GWAS de Acido Urico y los summary statistics referentes al GWAS de enfermedad de Parkinson
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
