@@ -14,6 +14,6 @@ Contraseña se proporcionara durante el curso.
 Software utilizado y webs de interes:
 
 LDhub -> http://ldsc.broadinstitute.org/
-, MR Base -> http://www.mrbase.org/
-, ANNOVAR -> http://annovar.openbioinformatics.org/en/latest/user-guide/download/
-, R -> https://www.r-project.org/
+; MR Base -> http://www.mrbase.org/
+; ANNOVAR -> http://annovar.openbioinformatics.org/en/latest/user-guide/download/
+; R -> https://www.r-project.org/
