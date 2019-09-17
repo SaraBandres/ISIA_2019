@@ -1,5 +1,5 @@
 # Anotacion y priorizacion de variantes mediante ANNOVAR 
-	- **Author(s):** Ignacio Fernandez Mata, Sara Bandres-Ciga
+	- **Author(s):** Ignacio Fernandez Mata, Cornelis Blauwendraat, Sara Bandres-Ciga
 	- **Date Last Updated:** Sept. 2019
 	
 ## Introduccion
@@ -52,41 +52,32 @@ annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp30a humandb/
 ```
 ## Convertimos *.VCF a *.avinput
 ```
-convert2annovar.pl -format vcf4 /data/LNG/saraB/ANNO/ANNOVAR_input/FILTERED.ataxia_chr1.WES.vcf > /data/LNG/saraB/ANNO/ANNOVAR_input/FILTERED.ataxia_chr1.WES.avinput
+convert2annovar.pl -format vcf4 /data/LNG/saraB/ANNO/ANNOVAR_input/Example.filtered.annot.vcf -allsample -withfreq > /data/LNG/saraB/ANNO/ANNOVAR_input/Example.filtered.annot.avinput
 ```
 VCF es el formato gold standard que la mayoria de los investigadores utilizan. Normalmente partimos de un archivo *.VCF y lo convertimos en un input mas manejable *.avinput.
 
 ## Anotamos nuestro archivo *.avinput teniendo en cuenta hg19
 ```
-table_annovar.pl /data/LNG/saraB/ANNO/ANNOVAR_input/FILTERED.ataxia_chr1.WES.avinput ANNOVAR_DATA/hg19 -buildver hg19 \
+table_annovar.pl /data/LNG/saraB/ANNO/ANNOVAR_input/Example.filtered.annot.avinput $ANNOVAR_DATA/hg18 -buildver hg18 \
 ```
 Los exomas de este proyecto se han alineado con la version de constructo de genoma humano 19/GRCh37. 
 Debemos mapear nuestras variantes de la misma manera.
 
 El argumento table_annovar.pl es un comando utilizado para anotar tu input y generar un tab-delimited output que contiene columnas representativas de cada una de las anotaciones.
 
-## Especificamos numero de threads
-```
---thread 16 \
-```
-
 ## Especificamos el directorio y nombre de nuestro output 
 ```
--out /data/LNG/saraB/ANNO/ANNOVAR_output/FILTERED.ataxia_chr1.WES \
+-out /data/LNG/saraB/ANNO/ANNOVAR_output/multianno_Example.filtered \
 ```
 ## Especificamos bases de datos y tipo de anotacion
 ```
--remove -protocol refGene,ensGene,ljb26_all,gnomad211_genome,exac03,avsnp147,dbnsfp30a -operation g,g,f,f,f,f,f -nastring . -csvout
+-remove -protocol refGene,ensGene,ljb26_all,exac03,avsnp147,dbnsfp30a -operation g,g,f,f,f,f -nastring . -csvout
 ```
 El argumento -operation le indica a ANNOVAR que operaciones utilizar para cada uno de los protocolos.
 Los protocolos pueden ser "g" que indica "anotacion a nivel del gen" o "f" que significa "anotacion en funcion de un filtro especifico", entre otros.
 El argumento -nastring me anadira un "." para aquellas variantes para las que no exista informacion.
 El argumento -csvout me generara un output en formato csv facilmente leible por excel.
 
-## Anotamos variantes en splicing
-```
--arg '-splicing 15',,, \
-```
 ## Output
 El archivo output contiene multiples columnas. 
 Cada una de las columnas corresponde a cada uno de los protocolos especificados en tu script.
