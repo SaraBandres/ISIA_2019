@@ -1,6 +1,6 @@
 ## Randomizacion Mendeliana
 
-	- **Author(s):** Sara Bandres-Ciga
+	- **Author(s):** Sara Bandres-Ciga, Ignacio Fernandez-Mata, Cornelis Blauwendraat
 	- **Date Last Updated:** Sept 2019
 
 ### Cargamos las librerias
