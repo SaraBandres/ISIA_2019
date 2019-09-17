@@ -1,6 +1,6 @@
 ## Randomizacion Mendeliana
 
-	- **Author(s):** Sara Bandres-Ciga
+	- **Author(s):** Sara Bandres-Ciga, Cornelis Blauwendraat, Ignacio Fernandez Mata
 	- **Date Last Updated:** Sept 2019
 
 ### Cargamos las librerias
@@ -38,7 +38,7 @@ ALS$SNP <- as.character(ALS$SNP)
 ```
 Out_data <- format_data(ALS, type="outcome")
 ```
-### Harmonizamos las summary statistics del GWAS del colesterol y las summary statistics referentes al GWAS de Esclerosis lateral amiotrofica
+### Armonizamos las summary statistics del GWAS del colesterol y las summary statistics referentes al GWAS de esclerosis lateral amiotrofica
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
