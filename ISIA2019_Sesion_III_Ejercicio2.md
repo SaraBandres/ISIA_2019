@@ -4,9 +4,9 @@
 	- **Date Last Updated:** Sept 2019
 	
 ## Vamos al directorio desde donde correremos los analisis
-	
+```	
 cd /home/jupyter/SARA_ISIA2019/Sesion_III/randomizacion_mendeliana
-
+```
 ## OPCIONAL -> Creamos un directorio donde vamos a instalar una serie de librerias
 ```
 mkdir RLIB
