@@ -60,17 +60,17 @@ ALS$SNP <- as.character(ALS$SNP)
 ```
 Out_data <- format_data(ALS, type="outcome")
 ```
-### Armonizamos las summary statistics del GWAS del colesterol y las summary statistics referentes al GWAS de esclerosis lateral amiotrofica
+## Armonizamos las summary statistics del GWAS del colesterol y las summary statistics referentes al GWAS de esclerosis lateral amiotrofica
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
-### Llevamos a cabo los analisis de Randomizacion Mendeliana
+## Llevamos a cabo los analisis de Randomizacion Mendeliana
 ```
 res <-mr(dat)
 res
 fwrite(res, file = "resultados_Colesterol_ALS_MRtests.tab", na = "NA", quote = F, row.names = F, sep = "\t")
 ```
-### Llevamos a cabo los analisis de sensibilidad
+## Llevamos a cabo los analisis de sensibilidad
 ```
 mr_heterogeneity(dat)
 mr_pleiotropy_test(dat)
