@@ -65,7 +65,7 @@ PD$SNP <- as.character(PD$SNP)
 ```	
 Out_data <- format_data(PD, type="outcome")
 ```
-## Harmonizamos las summary statistics del GWAS de Acido Urico y los summary statistics referentes al GWAS de enfermedad de Parkinson
+## Armonizamos las summary statistics del GWAS de Acido Urico y los summary statistics referentes al GWAS de enfermedad de Parkinson
 ```
 dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
@@ -80,7 +80,7 @@ fwrite(res, file = "resultados_AcidoUrico_PD_MRtests.tab", na = "NA", quote = F,
 mr_heterogeneity(dat)
 mr_pleiotropy_test(dat)
 ```
-## Creamos nuestro Forest Plot de los resultados
+## Creamos nuestro Forest plot de los resultados
 ```
 res_single <- mr_singlesnp(dat)
 p2 <- mr_forest_plot(res_single)
@@ -99,7 +99,7 @@ res_loo
 fwrite(res_loo, file = "resultados_AcidoUrico_PD_LOO.tab", na = "NA", quote = F, row.names = F, sep = "\t")
 ```
 
-## Creamos nuestro Forest Plot del analisis de leave-one-out
+## Creamos nuestro Forest plot del analisis de leave-one-out
 ```
 p3 <- mr_leaveoneout_plot(res_loo)
 ggsave(p3[[1]], file="LOO.jpeg", width=7, height=7)
