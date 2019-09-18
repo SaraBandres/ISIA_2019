@@ -6,7 +6,7 @@ Instructores: Sara Bandres-Ciga, Ignacio Fernandez Mata, Cornelis Blauwendraat
 
 Jupyter notebooks
 
-Login: https://notebook.hail.is 
+Login:
 https://notebook.hail.is/new
 
 Contraseña se proporcionara durante el curso.
