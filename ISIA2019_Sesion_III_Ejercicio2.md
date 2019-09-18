@@ -3,7 +3,7 @@
 	- **Author(s):** Sara Bandres-Ciga, Cornelis Blauwendraat, Ignacio Fernandez Mata
 	- **Date Last Updated:** Sept 2019
 
-## Creamos un directorio donde vamos a instalar una serie de librerias
+## OPCIONA -> Creamos un directorio donde vamos a instalar una serie de librerias
 ```
 mkdir RLIB
 ```
