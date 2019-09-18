@@ -3,12 +3,34 @@
 	- **Author(s):** Sara Bandres-Ciga, Cornelis Blauwendraat, Ignacio Fernandez Mata
 	- **Date Last Updated:** Sept 2019
 
-### Cargamos las librerias
+### Creamos un directorio donde vamos a instalar una serie de librerias
 ```
-library(data.table)
-library(TwoSampleMR)
+mkdir RLIB
+```
+### Abrimos el paquete de R
+```
+R
+```
+### Instalamos y cargamos las librerias
+
+```
+install.packages("devtools", lib="RLIB/")
+require(devtools,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install.packages("desc", lib="RLIB/")
+library(desc,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install.packages("usethis", lib="RLIB/")
+library(usethis,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install_github("MRCIEU/TwoSampleMR", lib="RLIB/")
+library(TwoSampleMR,lib="RLIB/")
+install.packages("RCurl", lib="RLIB/")
+library("RCurl",lib="RLIB/")
+install.packages("bitops", lib="RLIB/")
+library("bitops",lib="RLIB/")
+install_github("MRCIEU/MRInstruments", lib="RLIB/")
 library(MRInstruments)
-library(devtools)
 ```
 
 ## Leemos las variables instrumentales del GWAS de LDL-Colesterol
@@ -25,7 +47,7 @@ COLESTEROL$SNP <- as.character(COLESTEROL$SNP)
 Exp_data <- format_data(COLESTEROL, type="exposure")
 Exp_data <- clump_data(Exp_data)
 ```
-## Leemos las variables instrumentales del GWAS de Enfermedad de Parkinson
+## Leemos las variables instrumentales del GWAS de Esclerosis lateral amiotrofica
 En este casos son los SNPs de LDL-colesterol que hemos extraido de las Summary Stats de Esclerosis lateral amiotrofica
 ```	
 ALS <- read.table("ALS_Colesterol.txt", header =TRUE)
@@ -46,15 +68,34 @@ dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
 res <-mr(dat)
 res
+fwrite(res, file = "resultados_Colesterol_ALS_MRtests.tab", na = "NA", quote = F, row.names = F, sep = "\t")
 ```
 ### Llevamos a cabo los analisis de sensibilidad
 ```
 mr_heterogeneity(dat)
 mr_pleiotropy_test(dat)
 ```
-### Creamos nuestro Forest Plot
+## Creamos nuestro Forest plot de los resultados
 ```
 res_single <- mr_singlesnp(dat)
 p2 <- mr_forest_plot(res_single)
-p2[[1]]
+ggsave(p2[[1]], file="Colesterol_ALS.jpeg", width=7, height=7)
+```
+## Creamos un Funnel plot para comprobar simetria
+```
+res_single <- mr_singlesnp(dat)
+p4 <- mr_funnel_plot(res_single)
+ggsave(p4[[1]], file="Funnel_plot_Colesterol_ALS.jpeg", width=7, height=7)
+```
+## Llevamos a cabo el analisis de leave-one-out
+```
+res_loo <- mr_leaveoneout(dat)
+res_loo
+fwrite(res_loo, file = "resultados_Colesterol_ALS_LOO.tab", na = "NA", quote = F, row.names = F, sep = "\t")
+```
+
+## Creamos nuestro Forest plot del analisis de leave-one-out
+```
+p3 <- mr_leaveoneout_plot(res_loo)
+ggsave(p3[[1]], file="LOO_Colesterol_ALS.jpeg", width=7, height=7)
 ```
