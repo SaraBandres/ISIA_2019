@@ -3,7 +3,7 @@
 	- **Author(s):** Sara Bandres-Ciga, Ignacio Fernandez-Mata, Cornelis Blauwendraat
 	- **Date Last Updated:** Sept 2019
 
-## Creamos un directorio donde vamos a instalar una serie de librerias
+## OPCIONAL -> Creamos un directorio donde vamos a instalar una serie de librerias
 ```
 mkdir RLIB
 ```
@@ -11,7 +11,20 @@ mkdir RLIB
 ```
 R
 ```
-## Instalamos y cargamos las librerias
+## Cargamos las librerias
+```
+library(data.table)
+library(ggplot2)
+library(desc,lib="RLIB/")
+library(usethis,lib="RLIB/")
+library("bitops",lib="RLIB/")
+library("RCurl",lib="RLIB/")
+library(devtools,lib="RLIB/")
+library(TwoSampleMR,lib="RLIB/")
+library(MRInstruments,lib="RLIB/")
+```
+
+## SOLO si queremos instalarlas previamente
 
 ```
 install.packages("devtools", lib="RLIB/")
