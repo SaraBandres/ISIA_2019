@@ -86,11 +86,11 @@ res_single <- mr_singlesnp(dat)
 p2 <- mr_forest_plot(res_single)
 ggsave(p2[[1]], file="Acido_Urico_PD.jpeg", width=7, height=7)
 ```
-## Creamos un Funnel plot para comprobar 
+## Creamos un Funnel plot para comprobar simetria
 ```
 res_single <- mr_singlesnp(dat)
 p4 <- mr_funnel_plot(res_single)
-ggsave(p4[[1]], file="Funnel_plot.jpeg", width=7, height=7)
+ggsave(p4[[1]], file="Funnel_plot_AcidoUrico_PD.jpeg", width=7, height=7)
 ```
 ## Llevamos a cabo el analisis de leave-one-out
 ```
@@ -102,5 +102,5 @@ fwrite(res_loo, file = "resultados_AcidoUrico_PD_LOO.tab", na = "NA", quote = F,
 ## Creamos nuestro Forest plot del analisis de leave-one-out
 ```
 p3 <- mr_leaveoneout_plot(res_loo)
-ggsave(p3[[1]], file="LOO.jpeg", width=7, height=7)
+ggsave(p3[[1]], file="LOO_AcidoUrico_PD.jpeg", width=7, height=7)
 ```
