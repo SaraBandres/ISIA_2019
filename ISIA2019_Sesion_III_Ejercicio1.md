@@ -3,12 +3,34 @@
 	- **Author(s):** Sara Bandres-Ciga, Ignacio Fernandez-Mata, Cornelis Blauwendraat
 	- **Date Last Updated:** Sept 2019
 
-### Cargamos las librerias
+### Creamos un directorio donde vamos a instalar una serie de librerias
 ```
-library(data.table)
-library(TwoSampleMR)
+mkdir RLIB
+```
+### Abrimos el paquete de R
+```
+R
+```
+### Instalamos y cargamos las librerias
+
+```
+install.packages("devtools", lib="RLIB/")
+require(devtools,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install.packages("desc", lib="RLIB/")
+library(desc,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install.packages("usethis", lib="RLIB/")
+library(usethis,lib="RLIB/")
+library(devtools,lib="RLIB/")
+install_github("MRCIEU/TwoSampleMR", lib="RLIB/")
+library(TwoSampleMR,lib="RLIB/")
+install.packages("RCurl", lib="RLIB/")
+library("RCurl",lib="RLIB/")
+install.packages("bitops", lib="RLIB/")
+library("bitops",lib="RLIB/")
+install_github("MRCIEU/MRInstruments", lib="RLIB/")
 library(MRInstruments)
-library(devtools)
 ```
 
 ## Leemos las variables instrumentales del GWAS de Acido Urico 
@@ -51,15 +73,34 @@ dat <- harmonise_data(exposure_dat=Exp_data, outcome_dat=Out_data, action=2)
 ```
 res <-mr(dat)
 res
+fwrite(res, file = "resultados_AcidoUrico_PD_MRtests.tab", na = "NA", quote = F, row.names = F, sep = "\t")
 ```
 ## Llevamos a cabo los analisis de sensibilidad
 ```
 mr_heterogeneity(dat)
 mr_pleiotropy_test(dat)
 ```
-## Creamos nuestro Forest Plot
+## Creamos nuestro Forest Plot de los resultados
 ```
 res_single <- mr_singlesnp(dat)
 p2 <- mr_forest_plot(res_single)
-p2[[1]]
+ggsave(p2[[1]], file="Acido_Urico_PD.jpeg", width=7, height=7)
+```
+## Creamos un Funnel plot para comprobar 
+```
+res_single <- mr_singlesnp(dat)
+p4 <- mr_funnel_plot(res_single)
+ggsave(p4[[1]], file="Funnel_plot.jpeg", width=7, height=7)
+```
+## Llevamos a cabo el analisis de leave-one-out
+```
+res_loo <- mr_leaveoneout(dat)
+res_loo
+fwrite(res_loo, file = "resultados_AcidoUrico_PD_LOO.tab", na = "NA", quote = F, row.names = F, sep = "\t")
+```
+
+## Creamos nuestro Forest Plot del analisis de leave-one-out
+```
+p3 <- mr_leaveoneout_plot(res_loo)
+ggsave(p3[[1]], file="LOO.jpeg", width=7, height=7)
 ```
