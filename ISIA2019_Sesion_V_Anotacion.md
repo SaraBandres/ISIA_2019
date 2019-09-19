@@ -25,34 +25,37 @@ Permite identificar variantes documentadas en distintas bases de datos (ej. si u
 cd /data/LNG/saraB/ANNO/
 ```
 
-## Creamos una carpeta donde queremos almacenar nuestros outputs..
+## OPCIONAL: Creamos una carpeta donde queremos almacenar nuestros outputs..
 
 ```
 mkdir ANNOVAR_output
 ```
-## Descargamos ANNOVAR
+## OPCIONAL: Descargamos ANNOVAR
 
 ```
 http://download.openbioinformatics.org/cgi-bin/annovar_download.cgi
 ```
 Debemos registrarnos y a continuacion recibiremos un email con las instrucciones.
 
-## Descomprimimos ANNOVAR
+## OPCIONAL: Descomprimimos ANNOVAR
 ```
 tar xvfz annovar.latest.tar.gz
 ```
 Comprueba que el directorio bin/ contiene distintos Perl programs con sufijo *.pl
 
-## Descargamos las bases de datos para las anotaciones
+## OPCIONAL: Descargamos las bases de datos para las anotaciones
 ```
-annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGene humandb/
-annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 humandb/ 
-annotate_variation.pl -buildver hg19 -downdb -webfrom annovar avsnp147 humandb/ 
-annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp30a humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar refGene humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar exac03 humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar gerp++elem humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar snp128 humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar esp6500siv2_ea humandb/
+annotate_variation.pl -buildver hg18 -downdb -webfrom annovar ljb26_all humandb/
 ```
 ## Convertimos *.VCF a *.avinput
 ```
-convert2annovar.pl -format vcf4 /data/LNG/saraB/ANNO/ANNOVAR_input/Example.filtered.annot.vcf -allsample -withfreq > /data/LNG/saraB/ANNO/ANNOVAR_input/Example.filtered.annot.avinput
+convert2annovar.pl -format vcf4 SARA_ISIA2019/Sesion_V/Example.filtered.annot.vcf -allsample -withfreq > test.avinput
+
 ```
 VCF es el formato gold standard que la mayoria de los investigadores utilizan. Normalmente partimos de un archivo *.VCF y lo convertimos en un input mas manejable *.avinput.
 
@@ -65,13 +68,10 @@ Debemos mapear nuestras variantes de la misma manera.
 
 El argumento table_annovar.pl es un comando utilizado para anotar tu input y generar un tab-delimited output que contiene columnas representativas de cada una de las anotaciones.
 
-## Especificamos el directorio y nombre de nuestro output 
-```
--out /data/LNG/saraB/ANNO/ANNOVAR_output/multianno_Example.filtered \
-```
 ## Especificamos bases de datos y tipo de anotacion
 ```
--remove -protocol refGene,ensGene,ljb26_all,exac03,avsnp147,dbnsfp30a -operation g,g,f,f,f,f -nastring . -csvout
+table_annovar.pl test.avinput annovar/humandb/ -buildver hg18 -remove -protocol refGene,ljb26_all,exac03,gerp++elem,snp128,esp6500siv2_ea -operation g,f,f,f,f,f -nastring . -csvout -out myanno_EXAMPLE
+
 ```
 El argumento -operation le indica a ANNOVAR que operaciones utilizar para cada uno de los protocolos.
 Los protocolos pueden ser "g" que indica "anotacion a nivel del gen" o "f" que significa "anotacion en funcion de un filtro especifico", entre otros.
@@ -82,5 +82,7 @@ El argumento -csvout me generara un output en formato csv facilmente leible por 
 El archivo output contiene multiples columnas. 
 Cada una de las columnas corresponde a cada uno de los protocolos especificados en tu script.
 Las columnas Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene contienen anotaciones sobre como las mutaciones afectan a la estructura del gen y a la proteina. 
-Las columnas ExAC* representan la frecuencia alelica en distintas sub-poblaciones dentro del Exome Aggregation Consortium, mientras que avsnp147 hace referencia al rs ID de cada variante en la version 147 de dbSNP.
-Las columnas restantes contienen predictores de patogenicidad para variantes no-sinonimas utilizando las herramientas SIFT, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores y SiPhy scores.
+Las columnas ExAC* representan la frecuencia alelica en distintas sub-poblaciones dentro del Exome Aggregation Consortium.
+Las columnas restantes contienen:
+A) Predictores de patogenicidad para variantes de interes utilizando las herramientas SIFT, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores,  CADD scores, 
+B) Predictores de conservacion entre especies GERP++ scores,PhyloP scores y SiPhy scores.
