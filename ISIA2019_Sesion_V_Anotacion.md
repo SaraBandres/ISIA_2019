@@ -19,13 +19,13 @@ Permite identificar variantes en regionas especificas del genoma (ej. regiones c
 
 Permite identificar variantes documentadas en distintas bases de datos (ej. si una determinada variante esta o no reportada en dbSNP, cual es la frecuencia alelica en 1000 genomes o en ExAC, asi como calcular los scores a partir de SIFT/PolyPhen/LRT/MutationTaster/MutationAssessor/FATHMM/MetaSVM/MetaLR, identificar variantes intergenicas mediante GERP++ score < 2, entre otros).
 
-## Para comenzar, nos situamos en nuestro directorio..
+## OPCIONAL: Para comenzar, nos situamos en nuestro directorio..
 
 ```
 cd /data/LNG/saraB/ANNO/
 ```
 
-## OPCIONAL: Creamos una carpeta donde queremos almacenar nuestros outputs..
+## OPCIONAL: Creamos una carpeta donde queremos almacenar nuestros outputs.
 
 ```
 mkdir ANNOVAR_output
@@ -57,7 +57,7 @@ annotate_variation.pl -buildver hg18 -downdb -webfrom annovar ljb26_all humandb/
 convert2annovar.pl -format vcf4 SARA_ISIA2019/Sesion_V/Example.filtered.annot.vcf -allsample -withfreq > test.avinput
 
 ```
-VCF es el formato gold standard que la mayoria de los investigadores utilizan. Normalmente partimos de un archivo *.VCF y lo convertimos en un input mas manejable *.avinput.
+VCF es el formato gold standard que la mayoria de los investigadores utilizan. Normalmente partimos de un archivo *.VCF. El argumento convert2annovar.pl permite convertir nuestro input en un archivo mas manejable *.avinput.
 
 ## Anotamos nuestro archivo *.avinput teniendo en cuenta hg18
 ```
