@@ -96,7 +96,7 @@ annotate_variation.pl -buildver hg18 -downdb -webfrom annovar ljb26_all humandb/
 ```
 ## Convertimos *.VCF a *.avinput
 ```
-convert2annovar.pl -format vcf4 SARA_ISIA2019/Sesion_V/Example.filtered.annot.vcf -allsample -withfreq > test.avinput
+convert2annovar.pl -format vcf4 SARA_ISIA2019/Sesion_V/family_C.vcf -allsample -withfreq > test.avinput
 
 ```
 VCF es el formato gold standard que la mayoria de los investigadores utilizan. Normalmente partimos de un archivo *.VCF y lo convertimos en un input mas manejable *.avinput.
