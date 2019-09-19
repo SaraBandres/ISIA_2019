@@ -61,7 +61,7 @@ VCF es el formato gold standard que la mayoria de los investigadores utilizan. N
 
 ## Anotamos nuestro archivo *.avinput teniendo en cuenta hg18
 ```
-table_annovar.pl test.avinput annovar/humandb/ -buildver hg18 -remove -protocol refGene,ljb26_all,exac03,gerp++elem,snp128,esp6500siv2_ea -operation g,f,f,f,f,f -nastring . -csvout -out myanno_E
+table_annovar.pl test.avinput humandb/ -buildver hg18 -remove -protocol refGene,ljb26_all,exac03,gerp++elem,snp128,esp6500siv2_ea -operation g,f,f,f,f,f -nastring . -csvout -out myanno_E
 ```
 Los exomas de este proyecto se han alineado con la version de constructo de genoma humano 18. 
 Debemos mapear nuestras variantes de la misma manera.
@@ -103,7 +103,7 @@ VCF es el formato gold standard que la mayoria de los investigadores utilizan. N
 
 ## Anotamos nuestro archivo *.avinput teniendo en cuenta hg18
 ```
-table_annovar.pl test.avinput annovar/humandb/ -buildver hg18 -remove -protocol refGene,ljb26_all,exac03,gerp++elem,snp128,esp6500siv2_ea -operation g,f,f,f,f,f -nastring . -csvout -out ANOTACION_FAMILIA_C
+table_annovar.pl test.avinput humandb/ -buildver hg18 -remove -protocol refGene,ljb26_all,exac03,gerp++elem,snp128,esp6500siv2_ea -operation g,f,f,f,f,f -nastring . -csvout -out ANOTACION_FAMILIA_C
 ```
 Los exomas de este proyecto se han alineado con la version de constructo de genoma humano 18 
 Debemos mapear nuestras variantes de la misma manera.
